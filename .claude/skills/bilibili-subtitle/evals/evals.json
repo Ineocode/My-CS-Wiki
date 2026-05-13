@@ -1,0 +1,20 @@
+{
+  "skill_name": "bilibili-subtitle",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "下载这个B站视频的字幕：https://www.bilibili.com/video/BV1xx411c7mD",
+      "expected_output": "成功提取视频BV号，下载字幕并保存为纯文本文件"
+    },
+    {
+      "id": 2,
+      "prompt": "把BV1xx411c7mD的字幕导出为txt文件",
+      "expected_output": "使用BV号直接下载字幕并保存"
+    },
+    {
+      "id": 3,
+      "prompt": "获取哔哩哔哩视频 https://www.bilibili.com/video/av170001 的字幕内容",
+      "expected_output": "支持AV号格式的视频地址"
+    }
+  ]
+}

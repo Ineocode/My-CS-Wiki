@@ -1,0 +1,296 @@
+/* ======================================================
+   Anthropic Minimal Theme for Obsidian (Complete Edition)
+   ====================================================== */
+
+/* ======================================================
+   1. 核心色彩体系与强制覆盖 (Design Tokens)
+   ====================================================== */
+
+/* 亮色模式 (Light Mode) - 还原高级羊皮纸质感 */
+body.theme-light,
+.theme-light {
+  --bg-primary: #F5F4F0 !important;      
+  --bg-secondary: #EBEAE5 !important;    
+  --text-normal: #1A1D1A !important;     
+  --text-muted: #6B6B6B !important;      
+  --interactive-accent: #E17E5E !important; 
+  
+  --background-primary: #F5F4F0 !important;
+  --background-secondary: #EBEAE5 !important;
+}
+
+/* 暗色模式 (Dark Mode) - 深炭黑与柔和灰 */
+body.theme-dark,
+.theme-dark {
+  --bg-primary: #181817 !important;      
+  --bg-secondary: #222221 !important;
+  --text-normal: #E4E4E3 !important;
+  --text-muted: #8F8F8D !important;
+  --interactive-accent: #D97354 !important;
+  
+  --background-primary: #181817 !important;
+  --background-secondary: #222221 !important;
+}
+
+/* 强制清除 Obsidian 默认的容器背景色，让纸张底色全局透出 */
+.app-container,
+.workspace,
+.workspace-leaf-content,
+.view-content,
+.markdown-source-view,
+.markdown-reading-view {
+  background-color: var(--bg-primary) !important;
+}
+
+/* ======================================================
+   2. 字体栈与全局排版 (Typography & Layout)
+   ====================================================== */
+
+body {
+  /* 正文和标题：强烈的复古衬线体映射 */
+  --font-text: 'Galaxie Copernicus', 'Tiempos Text', 'anthropicSerif', 'Georgia', 'Times New Roman', serif !important;
+  --font-heading: var(--font-text) !important;
+  
+  /* UI 界面元素：极简无衬线体形成对比 */
+  --font-interface: 'Styrene B', 'anthropicSans', 'Helvetica Neue', 'Inter', '-apple-system', sans-serif !important;
+  
+  /* 代码等宽字体 */
+  --font-monospace: 'JetBrains Mono', 'Menlo', 'Courier New', monospace !important;
+  
+  /* 版心收窄与行高拉大，增加阅读沉浸感 */
+  --file-line-width: 640px !important; 
+  --line-height-normal: 1.65 !important;
+}
+
+/* 全局抗锯齿渲染 (提取自源码，让字体边缘如印刷般平滑) */
+body, .app-container {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  font-smoothing: antialiased !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+/* 强制 UI 面板使用无衬线字体 */
+.nav-folder-title, 
+.nav-file-title, 
+.workspace-tab-header, 
+.status-bar,
+.tree-item-self {
+  font-family: var(--font-interface);
+  font-size: 0.9em;
+}
+
+/* ======================================================
+   3. 细节排版系统 (Headings, Links, Selection)
+   ====================================================== */
+
+/* 标题样式：去粗体化，保持极其优雅的衬线外观 */
+.markdown-rendered h1,
+.markdown-rendered h2,
+.markdown-rendered h3,
+.markdown-rendered h4,
+.markdown-rendered h5,
+.markdown-rendered h6,
+.cm-header {
+  font-family: var(--font-heading);
+  font-weight: 400 !important; /* 去掉沉重的粗体，回归印刷感 */
+  color: var(--text-normal);
+  letter-spacing: -0.015em;
+}
+
+.markdown-rendered h1 { font-size: 2.4em; border-bottom: none; }
+.markdown-rendered h2 { font-size: 1.8em; border-bottom: none; }
+.markdown-rendered h3 { font-size: 1.4em; }
+
+/* 优化加粗字体的视觉比重 */
+.markdown-rendered strong {
+  color: var(--text-normal);
+  font-weight: 600;
+}
+
+/* 1:1 还原 Anthropic 超链接下划线美学 */
+.markdown-rendered a {
+  text-decoration: underline !important;
+  text-underline-offset: 0.2em !important; /* 避开字母下沉部分 (如 g, y) */
+  text-decoration-thickness: 0.06em !important; /* 极细的下划线 */
+  color: inherit !important; /* 链接不改变颜色，仅靠下划线区分 */
+  transition: opacity 0.2s ease;
+}
+
+.markdown-rendered a:hover {
+  opacity: 0.7 !important;
+}
+
+/* 提取自源码的标志性文本选中色 (赤陶色) */
+::selection,
+.markdown-rendered ::selection {
+  background-color: rgba(204, 120, 92, 0.4) !important;
+  color: inherit;
+}
+
+/* ======================================================
+   4. 块级元素 (Blockquotes & Code)
+   ====================================================== */
+
+/* 极简引用块：极其素雅 */
+.markdown-rendered blockquote,
+.cm-blockquote {
+  border-left: 1px solid var(--text-muted) !important; /* 改为极细的 1px 线条 */
+  background-color: transparent !important;
+  color: var(--text-normal);
+  font-size: 1.05em;
+  font-style: normal; /* Anthropic 的引用块很多时候并不倾斜 */
+  padding-left: 1.5em;
+  margin: 1.5em 0;
+}
+
+/* 行内代码 */
+.markdown-rendered code,
+.cm-inline-code {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-normal);
+  border-radius: 3px;
+  padding: 0.1em 0.3em;
+  font-family: var(--font-monospace);
+  font-size: 0.85em;
+}
+
+/* 代码块：去边框化，融入背景 */
+.markdown-rendered pre {
+  background-color: var(--bg-secondary) !important;
+  border: none !important;
+  border-radius: 6px; 
+  padding: 1.2em;
+  margin: 1.5em 0;
+}
+
+.markdown-rendered pre code {
+  background-color: transparent !important;
+  padding: 0;
+}
+
+/* ======================================================
+   5. 微交互与 UI 清理 (Scrollbars & Clutter removal)
+   ====================================================== */
+
+/* 提取自源码的极简滚动条设计 */
+::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+body.theme-light ::-webkit-scrollbar-thumb {
+  background: rgba(135, 134, 127, 0.2) !important; /* 弱化版的灰色 */
+  border-radius: 4px !important;
+  background-clip: content-box !important;
+}
+
+body.theme-dark ::-webkit-scrollbar-thumb {
+  background: rgba(250, 249, 240, 0.2) !important; /* 奶油色 */
+  border-radius: 4px !important;
+  background-clip: content-box !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 119, 87, 0.6) !important; /* 悬停时变为标志性强调色 */
+}
+
+/* 隐藏当前行高亮和阅读模式顶部的多余横线，做到极致留白 */
+.workspace-leaf-content[data-type="markdown"] .view-header {
+  border-bottom: none !important;
+}
+.markdown-source-view.mod-cm6 .cm-activeLine {
+  background-color: transparent !important; 
+}
+
+/* ======================================================
+   Anthropic 垂直排版节律与留白控制 (Vertical Rhythm)
+   ====================================================== */
+
+/* 1. 模拟 Anthropic 的 Line Height Trim，收紧标题自带行高 */
+.markdown-rendered h1,
+.markdown-rendered h2,
+.markdown-rendered h3,
+.markdown-rendered h4,
+.markdown-rendered h5,
+.markdown-rendered h6,
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header {
+  line-height: 1.25 !important;
+}
+
+/* 2. 贯彻“亲密性原则”：上宽下窄 */
+/* 前端注意：阅读模式使用 margin，实时预览模式 (CodeMirror) 必须使用 padding */
+
+/* H1: 最大的呼吸空间 */
+.markdown-rendered h1 {
+  margin-top: 3.5rem !important;    
+  margin-bottom: 1.5rem !important; 
+}
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-1 {
+  padding-top: 3.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+/* H2: 标准的章节分割 */
+.markdown-rendered h2 {
+  margin-top: 2.8rem !important;
+  margin-bottom: 1.2rem !important;
+}
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-2 {
+  padding-top: 2.8rem !important;
+  padding-bottom: 1.2rem !important;
+}
+
+/* H3: 子章节，与正文结合更紧密 */
+.markdown-rendered h3 {
+  margin-top: 2rem !important;
+  margin-bottom: 0.8rem !important;
+}
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-3 {
+  padding-top: 2rem !important;
+  padding-bottom: 0.8rem !important;
+}
+
+/* H4-H6: 弱标题，近似粗体正文 */
+.markdown-rendered h4, 
+.markdown-rendered h5, 
+.markdown-rendered h6 {
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-4,
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-5,
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-6 {
+  padding-top: 1.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+/* 3. 正文段落的标准间距 */
+.markdown-rendered p {
+  margin-top: 0 !important;
+  margin-bottom: 1.4rem !important; 
+}
+
+/* 4. 模拟 Anthropic 的 Margin Trim (去除首尾多余留白) */
+.markdown-rendered > *:first-child {
+  margin-top: 0 !important;
+}
+.markdown-rendered > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* 5. 修正列表的留白，使其像正文一样清爽 */
+.markdown-rendered ul, 
+.markdown-rendered ol {
+  margin-top: 0.5rem !important;
+  margin-bottom: 1.4rem !important;
+  padding-left: 2rem !important; 
+}
+
+.markdown-rendered li {
+  margin-bottom: 0.4rem !important; 
+}

@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Obsidian workspace (has local paths)
+.obsidian/workspace.json
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# B 站 Cookie
+04_Context/bilibili 登录信息.md
+
+# IDE
+.vscode/
+.idea/
