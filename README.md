@@ -100,11 +100,8 @@ PDF 读取、合并、拆分、旋转、水印、OCR 文字识别、表单填充
 请把这篇论文提取为知识卡片
 ```
 
-### B 站字幕提取
-- **`bilibili-subtitle`**：下载 B 站视频字幕为纯文本
-- **`bilibili-transcript`**：完整流水线——元数据 → 字幕 → LLM 重构 → Obsidian 结构化笔记
-
-支持 BV 号、AV 号、付费课程 (cheese) 的 ep 号。
+### `bilibili-transcript`
+B 站视频转录完整流水线——元数据 → 字幕 → LLM 重构 → Obsidian 结构化笔记。支持 BV 号、AV 号、付费课程 (cheese) 的 ep 号。
 
 ### `skill-creator`
 在知识库中创建、修改、评测自定义技能。可扩展新的 CS 领域技能包（如自动出题、代码审查、LeetCode 刷题助手）。
